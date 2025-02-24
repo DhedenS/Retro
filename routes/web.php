@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
 
 Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 Route::get('/barang/create', [BarangController::class, 'create'])->name('barang.create');

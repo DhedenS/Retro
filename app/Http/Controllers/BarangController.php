@@ -11,9 +11,27 @@ class BarangController extends Controller
         $barangs = Barang::all();
         return view('barang.index', compact('barangs'));
     }
+
     public function create()
     {
         return view('barang.create'); 
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama_barang' => 'required|string|max:255',
+            'harga' => 'required|integer|min:0',
+            'stok' => 'required|integer|min:0',
+        ]);
+
+        Barang::create([
+            'nama_barang' => $request->nama_barang,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+        ]);
+
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan!');
     }
 
     public function edit($id)
